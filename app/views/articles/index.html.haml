@@ -1,0 +1,20 @@
+.page-header
+  #myCarousel.carousel.slide{ data: {interval: 10000, ride: 'carousel'}}
+    %ol.carousel-indicators
+      %li.active{ data: {target: "#myCarousel", slide: {to: '0'}}}
+      %li{ data: {target: "#myCarousel", slide: {to: '1'}}}
+      %li{ data: {target: "#myCarousel", slide: {to: '2'}}}
+
+    .carousel-inner{ role: "listbox", class: 'text-center'}
+      .active.item
+        %h2= truncate @article[0]
+      .item
+        %h2= truncate @article[1]
+      .item
+        %h2= truncate @article[2]
+
+    %a{href: "#myCarousel", class: 'carousel-control left', data: {slide: 'prev'}}
+    %a{href: "#myCarousel", class: 'carousel-control right', data: {slide: 'next'}}
+    
+
+= render @articles

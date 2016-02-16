@@ -1,0 +1,22 @@
+%h1 Listing admin_articles
+
+%table.table
+  %thead
+    %tr
+      %th title
+      %th body
+      %th Imagge
+
+  %tbody
+    - @articles.each do |admin_article|
+      %tr
+        %td= admin_article.title
+        %td= truncate admin_article.body
+        %td= image_tag admin_article.image.url(:thumb)
+        %td= link_to 'Show', admin_article
+        %td= link_to 'Edit', edit_admin_article_path(admin_article)
+        %td= link_to 'Destroy', admin_article_path(admin_article), :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Article', new_admin_article_path

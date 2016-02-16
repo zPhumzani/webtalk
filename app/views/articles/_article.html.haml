@@ -1,0 +1,10 @@
+.well.well-sm
+  %h2= link_to article.title, article, class: 'article_title'
+  = image_tag article.image.url(:large), class: 'thumbnail'
+  %p= sanitize truncate(article.body, length: 100)
+  %p= article.user
+  %p= time_ago_in_words(article.created_at)
+  %small.comment_count= pluralize(article.comments.count, 'comment')
+  %p
+    = pluralize(article.get_upvotes.size, 'like') 
+    = pluralize(article.get_downvotes.size, 'dislike')

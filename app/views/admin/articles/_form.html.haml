@@ -1,0 +1,13 @@
+= simple_form_for([:admin, @article]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :body
+    - if @article.image.exists?
+      = image_tag @article.image.url
+    = f.input :image
+    = f.input :tag_list
+
+  .form-actions
+    = f.button :submit

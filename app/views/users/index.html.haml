@@ -1,0 +1,11 @@
+%h1 Listing users
+
+
+- @users.each do |user|
+  %p
+    = link_to user.first_name, user
+    = link_to user.last_name, user
+
+%br
+
+= link_to 'New User', new_user_path

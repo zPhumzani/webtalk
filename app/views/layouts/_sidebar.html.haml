@@ -1,0 +1,12 @@
+.page-header
+  %h2 Navigation
+
+%h3 Popular Tags
+%ul.breadcrumb 
+  - all_tags.each do |tag|
+    %li= link_to tag, tag
+%h3 Recent Post
+%ul.nav
+  - recent_articles.each do |article|
+    %li= link_to article.title, article
+%h3 Poporlar Posts

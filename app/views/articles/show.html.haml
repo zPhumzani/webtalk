@@ -8,12 +8,13 @@
   = image_tag @article.image.url, class: 'thumbnail'
 %p
   = sanitize @article.body
-%p= pluralize(@article.get_upvotes.size, 'like')
-%p= pluralize(@article.get_downvotes.size, 'dislike')
-= link_to 'Like', like_article_path(@article), method: :get
-= link_to 'Dislike', dislike_article_path(@article), method: :get
-
-= link_to "Back", :back
+%p
+  %span.label.label-success= pluralize(@article.get_upvotes.size, 'like')
+  %span.label.label-danger= pluralize(@article.get_downvotes.size, 'dislike')
+%p.btn-group
+  = link_to 'Like', like_article_path(@article), method: :get, class: 'btn btn-xs btn-primary'
+  = link_to 'Dislike', dislike_article_path(@article), method: :get, class: 'btn btn-xs btn-danger'
+  = link_to "Back", :back, class: 'btn btn-xs btn-warning'
 
 %h3= "Comments #{@article.comments.size}"
 = render @article.comments

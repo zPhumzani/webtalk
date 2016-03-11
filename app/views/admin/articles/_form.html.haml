@@ -4,10 +4,12 @@
   .form-inputs
     = f.input :title
     = f.input :body
-    - if @article.image.exists?
-      = image_tag @article.image.url
-    = f.input :image
+    = f.association :category, multiply: true
     = f.input :tag_list
+    - if @article.file_contents.present?
+      = image_tag(image_classified_path(@article), class: 'img-responsive')
+    = f.input :file, as: :file
+
 
   .form-actions
     = f.button :submit

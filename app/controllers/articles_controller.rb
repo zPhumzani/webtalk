@@ -12,6 +12,20 @@ class ArticlesController < ApplicationController
   def show
   end
 
+  def image 
+    @image = Article.friendly.find(params[:id])
+    send_data @image.file_contents, filename: @image.filename, type: @image.content_type, :diposition => "inline"
+  end
+
+  def search
+    @articles = Article.where(["lower(title) like ?", "%" + params[:search].downcase + "%"])
+    if params['search'].to_s.size < 1
+      redirect_to root_url, alert: "You just search for nothing?"
+    else
+      render :index
+    end
+  end
+
   def upvote
     @article.upvote_by current_user
     redirect_to :back
@@ -25,6 +39,6 @@ class ArticlesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = Article.find(params[:id])
+      @article = Article.friendly.find(params[:id])
     end
 end

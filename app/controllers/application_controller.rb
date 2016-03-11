@@ -22,7 +22,15 @@ class ApplicationController < ActionController::Base
     	current_user.is_a? User
     end
 
-    helper_method :logged_in?, :recent_articles, :all_tags
+    def admin_rights?
+        if logged_in? && current_user.admin?
+          return true
+        else
+          return false
+        end
+    end
+
+    helper_method :logged_in?, :recent_articles, :all_tags, :admin_rights?
 
     def access_denied
     	redirect_to login_path, notice: "Please log in to continue" and return false

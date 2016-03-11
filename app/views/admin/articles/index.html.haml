@@ -14,7 +14,8 @@
       %tr
         %td= admin_article.title
         %td= truncate admin_article.body
-        %td= image_tag admin_article.image.url(:thumb)
+        - unless admin_article.file_contents.blank?
+          %td= image_tag(image_admin_article_path(admin_article), class: 'img-responsive')
         %td= link_to 'Show', admin_article
         %td= link_to 'Edit', edit_admin_article_path(admin_article)
         %td= link_to 'Destroy', admin_article_path(admin_article), :method => :delete, :data => { :confirm => 'Are you sure?' }

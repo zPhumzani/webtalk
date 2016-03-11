@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :categories, only: [:show, :index]
   resources :tags
   resource :session, only: [:create, :destroy]
   resources :users 
@@ -14,7 +15,10 @@ Rails.application.routes.draw do
     root 'application#index'
 
       resources :users
-      resources :articles
+      resources :categories
+      resources :articles do
+        get 'image', on: :member
+      end
   end
 
   resources :articles, only: [:show, :index] do 
@@ -23,7 +27,10 @@ Rails.application.routes.draw do
       get "like", to: "articles#upvote"
       get 'dislike', to: "articles#downvote"
     end
+    get 'image', on: :member
   end
+
+  post 'search' => 'articles#search', as: :search
 
   root "articles#index"
   # The priority is based upon order of creation: first created -> highest priority.

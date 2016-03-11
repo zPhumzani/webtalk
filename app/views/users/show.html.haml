@@ -1,5 +1,5 @@
-%p#notice= notice
-
+.page-header
+  %h2 My Profile
 %p
   %b First name:
   = @user.first_name
@@ -9,10 +9,13 @@
 %p
   %b Email:
   = @user.email
-%p
-  %b Password:
-  = @user.password
 
 = link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+
+%hr
+
+%article
+%dl
+  - @user.articles.each do |article|
+    %dt= link_to article.title, article
+    %dd= truncate(sanitize(article.body), length: 120)

@@ -1,0 +1,8 @@
+.page-header
+  %h2= @category.name
+
+.post
+  -if @category.articles.blank?
+    %p Coming soon....!
+  - else
+    = render @category.articles

@@ -1,10 +1,22 @@
-.well.well-sm
+%article
   %h2= link_to article.title, article, class: 'article_title'
-  = link_to(image_tag(article.image.url(:large), class: 'thumbnail'), article)
-  %p= sanitize truncate(article.body, length: 100)
-  %p= article.user
-  %p= time_ago_in_words(article.created_at)
-  %small.comment_count= pluralize(article.comments.count, 'comment')
+  %p.lead
+    by
+    = link_to article.user, user_path(article.user)
   %p
-    %span.label.label-success= pluralize(article.get_upvotes.size, 'like')
-    %span.label.label-danger= pluralize(article.get_downvotes.size, 'dislike')
+    %span.glyphicon.glyphicon-time
+    Posted on
+    = article.created_at.strftime("%B %m, %Y")
+  %hr
+  - unless article.file_contents.blank?
+    = image_tag(image_article_path(article), class: 'img-responsive')
+  %hr
+  %p
+    = sanitize truncate(article.body, length: 120)
+    = link_to 'read more >>>', article
+  %ul.btn-group
+    %li.btn.label.label-info= pluralize(article.comments.count, 'comment')
+    %li.btn.label.label-success= pluralize(article.get_upvotes.size, 'like')
+    %li.btn.label.label-danger= pluralize(article.get_downvotes.size, 'dislike')
+
+%hr

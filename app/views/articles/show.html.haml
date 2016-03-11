@@ -5,7 +5,9 @@
   - @article.tags.each do |tag| 
     = link_to tag.name, tag_path(tag)
 %p
-  = image_tag @article.image.url, class: 'thumbnail'
+  -#= image_tag @article.image.url, class: 'thumbnail'
+  - unless @article.file_contents.blank?
+    = image_tag(image_article_path(@article), class: 'img-responsive')
 %p
   = sanitize @article.body
 %p
